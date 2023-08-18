@@ -1,2 +1,2 @@
-# Udacity-Shop-Hosting
+# Udacity-Hosting-Shop
  

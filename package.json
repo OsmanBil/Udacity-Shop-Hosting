@@ -1,0 +1,16 @@
+{
+    "scripts": {
+        "frontend:install": "cd store/store-frontend && npm install -f",
+        "frontend:start": "cd store/store-frontend && npm run start",
+        "frontend:build": "cd store/store-frontend && npm run build",
+        "frontend:test": "cd store/store-frontend && npm run test",
+        "frontend:e2e": "cd store/store-frontend && npm run e2e",
+        "frontend:lint": "cd store/store-frontend && npm run lint",
+        "frontend:deploy": "cd store/store-frontend && npm run deploy",
+        "backend:install": "cd store/store-backend && npm install",
+        "backend:build": "cd store/store-backend && npm run build",
+        "backend:start": "cd store/store-backend && npm run start",
+        "backend:deploy": "cd store/store-backend && npm run deploy",
+        "deploy": "npm run api:deploy && npm run frontend:deploy"
+    }
+}
