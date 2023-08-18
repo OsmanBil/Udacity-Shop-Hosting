@@ -1,3 +1,6 @@
 /store-frontend/node_modules
 /store-frontend/.vscode
 /store-frontend/.angular
+/store-backend/.env
+/store-backend/database.json
+/store-backend/.vscode
