@@ -4,3 +4,5 @@
 /store-backend/.env
 /store-backend/database.json
 /store-backend/.vscode
+/store-backend/node_modules
+/store-frontend/dist/my-store
