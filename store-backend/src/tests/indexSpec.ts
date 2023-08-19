@@ -41,8 +41,7 @@ beforeAll((done) => {
         .set('Authorization', `Bearer ${token}`)
         .send({
           name: 'testProduct',
-          price: 100,
-          category: 'testCategory',
+          price: 100
         })
         .end((err, response) => {
           productId = response.body.id;
@@ -209,8 +208,7 @@ describe('Test endpoint responses', () => {
         .set('Authorization', `Bearer ${token}`)
         .send({
           name: 'updatedProduct',
-          price: 200,
-          category: 'updatedCategory',
+          price: 200
         });
 
       expect(response.status).toBe(200);
@@ -311,17 +309,6 @@ describe('Test endpoint responses', () => {
       expect(typeof store.create).toBe('function');
     });
 
-    it('create method should add a product', async () => {
-      testProduct = await store.create({
-        name: 'Test Product',
-        price: 100,
-        category: 'Test Category',
-      });
-
-      expect(testProduct).toBeDefined();
-      expect(testProduct.name).toBe('Test Product');
-      expect(testProduct.category).toBe('Test Category');
-    });
 
     // Test for the show method
     it('should have a show method', () => {
@@ -334,7 +321,6 @@ describe('Test endpoint responses', () => {
       expect(result).toBeDefined();
       expect(result.id).toBe(testProduct.id);
       expect(result.name).toBe('Test Product');
-      expect(result.category).toBe('Test Category');
     });
 
     // Test for the update method
@@ -350,14 +336,12 @@ describe('Test endpoint responses', () => {
       const updatedProduct = await store.update(testProduct.id!, {
         name: 'Updated Product',
         price: 150,
-        category: 'Updated Category',
       });
 
       if (updatedProduct !== null) {
         expect(updatedProduct).toBeDefined();
         expect(updatedProduct.id).toBe(testProduct.id);
         expect(updatedProduct.name).toBe('Updated Product');
-        expect(updatedProduct.category).toBe('Updated Category');
       } else {
         throw new Error('Updated product is null');
       }

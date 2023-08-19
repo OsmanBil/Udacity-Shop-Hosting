@@ -6,3 +6,4 @@
 /store-backend/.vscode
 /store-backend/node_modules
 /store-frontend/dist/my-store
+/store-backend/dist
