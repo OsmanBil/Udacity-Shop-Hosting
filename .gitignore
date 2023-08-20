@@ -1,12 +1,3 @@
-/store-frontend/node_modules
-/store-frontend/.vscode
-/store-frontend/.angular
-/store-backend/.env
-/store-backend/database.json
-/store-backend/.vscode
-/store-backend/node_modules
-/store-frontend/dist/my-store
-/store-backend/dist
 /store/store-backend/.env
 /store/store-backend/.vscode
 /store/store-backend/database.json
@@ -14,3 +5,4 @@
 /store/store-frontend/node_modules
 /store/store-frontend/.angular
 /store/store-frontend/.vscode
+/store/store-backend/node_modules
