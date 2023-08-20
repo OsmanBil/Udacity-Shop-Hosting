@@ -9,6 +9,8 @@ jobs:
       - image: node:18
     steps:
       - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
       - run: npm install
       - run: npm run frontend:install
       - run: npm run backend:install
@@ -46,6 +48,16 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run: npm run frontend:test
 
+  # Füge dies hinzu, wenn du Backend-Tests hast
+  test_backend:
+    docker:
+      - image: node:18
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run: npm run backend:test
+
 workflows:
   version: 2
   build_and_test:
@@ -60,3 +72,7 @@ workflows:
       - test_frontend:
           requires:
             - build_frontend
+      # Füge dies hinzu, wenn du Backend-Tests hast
+      - test_backend:
+          requires:
+            - build_backend
