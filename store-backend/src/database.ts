@@ -18,10 +18,12 @@ console.log(`Connected to ${POSTGRES_DB} database.`);
 
 const poolConfig: PoolConfig = {
   host: POSTGRES_HOST,
+  port: 5432, // Hinzufügen, wenn es nicht der Standardport ist
   database: ENV === 'test' ? POSTGRES_DB_TEST : POSTGRES_DB,
   user: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
 };
+
 
 const client: Pool = new Pool(poolConfig);
 
