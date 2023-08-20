@@ -7,3 +7,6 @@
 /store-backend/node_modules
 /store-frontend/dist/my-store
 /store-backend/dist
+/store/store-backend/.env
+/store/store-backend/.vscode
+/store/store-backend/database.json
