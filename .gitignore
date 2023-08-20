@@ -10,3 +10,7 @@
 /store/store-backend/.env
 /store/store-backend/.vscode
 /store/store-backend/database.json
+/store/store-frontend/dist
+/store/store-frontend/node_modules
+/store/store-frontend/.angular
+/store/store-frontend/.vscode
