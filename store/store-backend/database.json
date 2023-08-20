@@ -1,0 +1,16 @@
+// {
+//   "dev": {
+//     "driver": "pg",
+//     "host": "udacity-database-2.cxindoou3tc6.us-east-1.rds.amazonaws.com",
+//     "database": "postgres",
+//     "user": "postgres",
+//     "password": "postgresDb"
+//   },
+//   "test": {
+//     "driver": "pg",
+//     "host": "udacity-database-2.cxindoou3tc6.us-east-1.rds.amazonaws.com",
+//     "database": "postgres",
+//     "user": "postgres",
+//     "password": "postgresDb"
+//   }
+// }
