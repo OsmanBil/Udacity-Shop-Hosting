@@ -6,3 +6,4 @@
 /store/store-frontend/.angular
 /store/store-frontend/.vscode
 /store/store-backend/node_modules
+/store/set_env.sh
