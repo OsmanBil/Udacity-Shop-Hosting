@@ -9,6 +9,7 @@
         "frontend:deploy": "cd store/store-frontend && npm run deploy",
         "backend:install": "cd store/store-backend && npm install",
         "backend:build": "cd store/store-backend && npm run build",
+        "backend:test": "cd store/store-backend && npm run test",
         "backend:start": "cd store/store-backend && npm run start",
         "backend:deploy": "cd store/store-backend && npm run deploy",
         "deploy": "npm run api:deploy && npm run frontend:deploy"
