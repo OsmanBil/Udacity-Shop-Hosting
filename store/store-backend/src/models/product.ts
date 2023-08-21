@@ -34,6 +34,7 @@ export class ProductStore {
     }
   }
 
+
   async create(p: Product): Promise<Product> {
     try {
       const conn = await Client.connect();

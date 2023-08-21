@@ -7,3 +7,4 @@
 /store/store-frontend/.vscode
 /store/store-backend/node_modules
 /store/set_env.sh
+/store/store-backend/dist
