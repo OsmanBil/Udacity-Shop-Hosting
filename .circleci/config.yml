@@ -41,24 +41,33 @@ jobs:
 
   test_backend:
     docker:
-       - image: node:18
-       - image: postgres:13
-         environment:
-          POSTGRES_USER: myuser
-          POSTGRES_PASSWORD: mypassword
-          POSTGRES_DB: mydatabase
-    steps:
-    - checkout
-    - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
-    - run:
-        name: Warten auf die Datenbank
-        command: dockerize -wait tcp://localhost:5432 -timeout 1m
-    - run:
-        name: Backend-Tests
-        command: cd store/store-backend && npm run test
+      - image: node:18
+      - image: postgres:13
         environment:
-          DATABASE_URL: postgres://myuser:mypassword@localhost:5432/mydatabase
+          POSTGRES_HOST: 127.0.0.1
+          POSTGRES_DB: dbtest
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: asds
+    environment:
+      DOCKERIZE_VERSION: v0.6.1
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install Dockerize
+          command: |
+            wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+            tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+            rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+      - run:
+          name: Warten auf die Datenbank
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Backend-Tests
+          command: cd store/store-backend && npm run test
+          environment:
+            DATABASE_URL: postgres://postgres:asds@localhost:5432/dbtest
 
 workflows:
   version: 2
