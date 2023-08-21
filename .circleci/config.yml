@@ -39,6 +39,14 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run: npm run backend:build
 
+  test_backend:
+    docker:
+      - image: node:18
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run: cd store/store-backend && npm run test
 
 workflows:
   version: 2
@@ -51,3 +59,6 @@ workflows:
       - build_backend:
           requires:
             - install_dependencies
+      - test_backend:
+          requires:
+            - build_backend
