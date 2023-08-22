@@ -34,12 +34,17 @@ export class ProductStore {
     }
   }
 
-
   async create(p: Product): Promise<Product> {
     try {
       const conn = await Client.connect();
-      const sql = 'INSERT INTO products (name, description, price, url) VALUES($1, $2, $3, $4) RETURNING *';
-      const result = await conn.query(sql, [p.name, p.description, p.price, p.url]);
+      const sql =
+        'INSERT INTO products (name, description, price, url) VALUES($1, $2, $3, $4) RETURNING *';
+      const result = await conn.query(sql, [
+        p.name,
+        p.description,
+        p.price,
+        p.url,
+      ]);
       const product = result.rows[0];
       conn.release();
       return product;
@@ -48,7 +53,10 @@ export class ProductStore {
     }
   }
 
-  async update(id: number, updatedProduct: Partial<Product>): Promise<Product | null> {
+  async update(
+    id: number,
+    updatedProduct: Partial<Product>,
+  ): Promise<Product | null> {
     try {
       const conn = await Client.connect();
       const existingProduct = await this.findById(id);
@@ -57,7 +65,8 @@ export class ProductStore {
         throw new Error(`Product with ID ${id} not found.`);
       }
       const mergedProduct: Product = { ...existingProduct, ...updatedProduct };
-      const sql = 'UPDATE products SET name = $1, description = $2, price = $3, url = $4 WHERE id = $5 RETURNING *';
+      const sql =
+        'UPDATE products SET name = $1, description = $2, price = $3, url = $4 WHERE id = $5 RETURNING *';
       const result = await conn.query(sql, [
         mergedProduct.name,
         mergedProduct.description,

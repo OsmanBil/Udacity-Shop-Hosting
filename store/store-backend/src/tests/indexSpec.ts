@@ -2,7 +2,7 @@ import supertest from 'supertest';
 import app from '../server';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { Order, OrderStore } from '../models/order';
-import { Product, ProductStore } from '../models/product';
+import { ProductStore } from '../models/product';
 import { UserStore } from '../models/user';
 
 type DecodedToken = string | JwtPayload | null;
@@ -210,7 +210,7 @@ describe('Test endpoint responses', () => {
         .set('Authorization', `Bearer ${token}`)
         .send({
           name: 'updatedProduct',
-          price: 200
+          price: 200,
         });
 
       expect(response.status).toBe(200);
@@ -293,7 +293,6 @@ describe('Test endpoint responses', () => {
 
   describe('Product Model', () => {
     const store = new ProductStore();
-    let testProduct: Product;
 
     // Test for the index method
     it('should have an index method', () => {
@@ -310,7 +309,6 @@ describe('Test endpoint responses', () => {
     it('should have a create method', () => {
       expect(typeof store.create).toBe('function');
     });
-
 
     // Test for the show method
     it('should have a show method', () => {

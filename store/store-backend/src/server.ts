@@ -15,7 +15,7 @@ const PORT: string | number = process.env.PORT || 3000;
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN || 'http://localhost:4200',
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
 };
 
 // const corsOptions = {
@@ -23,7 +23,7 @@ const corsOptions = {
 //   optionsSuccessStatus: 200
 // };
 
-app.use(cors(corsOptions));  // Verwende CORS als Middleware
+app.use(cors(corsOptions)); // Verwende CORS als Middleware
 app.use(bodyParser.json()); // Use the bodyParser middleware to parse the request body if it is in JSON format
 
 // Define a route handler for the main endpoint ('/') of the server

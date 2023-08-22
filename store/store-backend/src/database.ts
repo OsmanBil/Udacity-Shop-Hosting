@@ -24,11 +24,13 @@ const poolConfig: PoolConfig = {
   database: ENV === 'test' ? POSTGRES_DB_TEST : POSTGRES_DB,
   user: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
-  ...(isProduction ? {
-    ssl: {
-      rejectUnauthorized: false
-    }
-  } : {})
+  ...(isProduction
+    ? {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      }
+    : {}),
 };
 
 const client: Pool = new Pool(poolConfig);

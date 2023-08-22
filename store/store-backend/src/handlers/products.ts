@@ -29,7 +29,7 @@ const create = async (req: Request, res: Response) => {
     description: req.body.description,
     price: req.body.price,
     url: req.body.url,
-    quantity: req.body.quantity
+    quantity: req.body.quantity,
   };
 
   try {
@@ -48,7 +48,7 @@ const update = async (req: Request, res: Response) => {
     description: req.body.description,
     price: req.body.price,
     url: req.body.url,
-    quantity: req.body.quantity
+    quantity: req.body.quantity,
   };
 
   try {
