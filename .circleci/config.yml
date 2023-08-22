@@ -52,7 +52,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Lint Frontend
-          command: npm run lint
+          command: cd store/store-frontend && npm run lint
 
   format_frontend:
     docker:
@@ -63,7 +63,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Format Frontend
-          command: npm run prettier
+          command: cd store/store-frontend && npm run prettier
 
   build_frontend:
     docker:
