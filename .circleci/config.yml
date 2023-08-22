@@ -10,18 +10,15 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
-      - run: cd store/store-frontend && npm install
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run: npm install
+      - run: npm run frontend:install
+      - run: npm run backend:install
       - save_cache:
-          key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
+          key: dependency-cache-{{ checksum "package.json" }}
           paths:
+            - ./node_modules
             - ./store/store-frontend/node_modules
-      - restore_cache:
-          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
-      - run: cd store/store-backend && npm install
-      - save_cache:
-          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
-          paths:
             - ./store/store-backend/node_modules
 
   lint_backend:
@@ -75,7 +72,9 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
-      - run: npm run frontend:build
+      - run:
+          name: Build Frontend
+          command: cd store/store-frontend && npm run build
 
   build_backend:
     docker:
@@ -84,7 +83,9 @@ jobs:
       - checkout
       - restore_cache:
           key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
-      - run: npm run backend:build
+      - run:
+          name: Build Backend
+          command: cd store/store-backend && npm run build
 
   test_backend:
     docker:
