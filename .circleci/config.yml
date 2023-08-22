@@ -21,6 +21,50 @@ jobs:
             - ./store/store-frontend/node_modules
             - ./store/store-backend/node_modules
 
+  lint_backend:
+    docker:
+      - image: node:18
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Lint Backend
+          command: cd store/store-backend && npm run lint
+
+  format_backend:
+    docker:
+      - image: node:18
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Format Backend
+          command: cd store/store-backend && npm run prettier
+
+  lint_frontend:
+    docker:
+      - image: node:18
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Lint Frontend
+          command: npm run lint
+
+  format_frontend:
+    docker:
+      - image: node:18
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Format Frontend
+          command: npm run prettier
+
   build_frontend:
     docker:
       - image: node:18
@@ -74,6 +118,18 @@ workflows:
   build_and_test:
     jobs:
       - install_dependencies
+      - lint_backend:
+          requires:
+            - install_dependencies
+      - format_backend:
+          requires:
+            - install_dependencies
+      - lint_frontend:
+          requires:
+            - install_dependencies
+      - format_frontend:
+          requires:
+            - install_dependencies
       - build_frontend:
           requires:
             - install_dependencies
