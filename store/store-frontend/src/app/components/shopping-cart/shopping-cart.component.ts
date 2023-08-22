@@ -6,11 +6,10 @@ import { Router } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
 import { Product } from 'src/app/models/product';
 
-
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.css']
+  styleUrls: ['./shopping-cart.component.css'],
 })
 export class ShoppingCartComponent implements OnInit {
   cartItems: CartItem[] = [];
@@ -23,7 +22,12 @@ export class ShoppingCartComponent implements OnInit {
   addressLength: number = 0;
   lastFourDigits: string = '';
 
-  constructor(private cartService: CartService, private decimalPipe: DecimalPipe, private orderService: OrderService, private router: Router) { }
+  constructor(
+    private cartService: CartService,
+    private decimalPipe: DecimalPipe,
+    private orderService: OrderService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.cartItems = this.cartService.getCart();
@@ -31,7 +35,7 @@ export class ShoppingCartComponent implements OnInit {
 
   getTotalAmount(): number {
     const total: number = this.cartItems.reduce((acc, item) => {
-      return acc + (item.quantity * item.product.price);
+      return acc + item.quantity * item.product.price;
     }, 0);
     return +total.toFixed(2);
   }
@@ -51,7 +55,9 @@ export class ShoppingCartComponent implements OnInit {
   removeFromCart(product: Product): void {
     this.cartService.removeFromCart(product);
     this.cartItems = this.cartService.getCart();
-    alert(`The product "${product.name}" has been removed from the shopping cart.`);
+    alert(
+      `The product "${product.name}" has been removed from the shopping cart.`,
+    );
   }
 
   handleNameChange(newValue: string) {

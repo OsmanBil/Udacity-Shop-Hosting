@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { CartService } from 'src/app/services/cart.service';
@@ -6,13 +6,16 @@ import { CartService } from 'src/app/services/cart.service';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css']
+  styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent {
   product: Product;
   selectedQuantity: number = 1;
 
-  constructor(private route: ActivatedRoute, private cartService: CartService) {
+  constructor(
+    private route: ActivatedRoute,
+    private cartService: CartService,
+  ) {
     this.product = new Product();
   }
 
@@ -24,7 +27,7 @@ export class ProductDetailsComponent {
     this.cartService.addToCart(this.product, +this.selectedQuantity);
     alert(`The product "${product.name}" has been added to the shopping cart.`);
   }
- 
+
   async loadData(): Promise<void> {
     const id: number = +this.route.snapshot.paramMap.get('id')!;
     try {
@@ -34,7 +37,7 @@ export class ProductDetailsComponent {
       }
       const products: Product[] = await response.json();
       this.product = products.find((product: Product) => product.id === id)!;
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('There was a problem:', error);
     }
   }

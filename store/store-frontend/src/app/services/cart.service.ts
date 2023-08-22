@@ -7,15 +7,15 @@ export interface CartItem {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
   private cart: CartItem[] = [];
 
-  constructor() { }
+  constructor() {}
 
   addToCart(product: Product, quantity: number): void {
-    const cartItem = this.cart.find(item => item.product.id === product.id);
+    const cartItem = this.cart.find((item) => item.product.id === product.id);
 
     if (cartItem) {
       cartItem.quantity += quantity;
@@ -33,7 +33,7 @@ export class CartService {
   }
 
   removeFromCart(product: Product): void {
-    const index = this.cart.findIndex(item => item.product.id === product.id);
+    const index = this.cart.findIndex((item) => item.product.id === product.id);
 
     if (index > -1) {
       this.cart.splice(index, 1);

@@ -5,16 +5,15 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
-
 export class ProductListComponent implements OnInit {
-  title: string = "Products";
+  title: string = 'Products';
   products: Product[] = [];
 
-    // Backend-Server URL
-    //private BASE_URL: string = 'http://testumgebung-env.eba-6jy5svvu.us-east-1.elasticbeanstalk.com';
-    private BASE_URL: string = 'http://localhost:3000';
+  // Backend-Server URL
+  //private BASE_URL: string = 'http://testumgebung-env.eba-6jy5svvu.us-east-1.elasticbeanstalk.com';
+  private BASE_URL: string = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
 
@@ -23,9 +22,9 @@ export class ProductListComponent implements OnInit {
       (jsonData: Product[]) => {
         this.products = jsonData;
       },
-      (error: any) => {
-        console.error("Failed to fetch the product data:", error);
-      }
+      (error: unknown) => {
+        console.error('Failed to fetch the product data:', error);
+      },
     );
   }
 

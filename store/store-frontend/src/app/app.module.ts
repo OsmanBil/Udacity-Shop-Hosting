@@ -16,7 +16,6 @@ import { CartService } from './services/cart.service';
 import { DecimalPipe } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +25,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ProductDetailsComponent,
     ShoppingCartComponent,
     OrderConfirmationComponent,
-    ProductComponent
+    ProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,9 +33,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [CartService, DecimalPipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
