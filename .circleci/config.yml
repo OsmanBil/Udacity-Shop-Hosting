@@ -73,8 +73,11 @@ jobs:
     - restore_cache:
         key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
     - run:
-        name: Erstelle dist1 Ordner
-        command: mkdir -p store/store-frontend/src/dist1
+         name: Überprüfe Benutzer und Berechtigungen
+         command: |
+          whoami
+          ls -ld store/store-frontend/src
+
     - run:
         name: Build Frontend
         command: cd store/store-frontend && npm run build
