@@ -139,7 +139,8 @@ jobs:
             ls -la store
             ls -la store/store-frontend
             ls -la store/store-frontend/src
-            ls -la dist1
+            ls -la store/store-frontend/src/dist1
+
 
 workflows:
   version: 2
