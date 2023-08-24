@@ -135,6 +135,9 @@ jobs:
       - run:
           name: Deploy to S3
           command: |
+            ls -la 
+            ls -la store
+            ls -la store/store-frontend
             ls -la store/store-frontend/src
 
 workflows:
