@@ -77,6 +77,9 @@ jobs:
          command: |
           whoami
           ls -ld store/store-frontend/src
+    - run:
+         name: Erstelle dist1 Ordner
+         command: mkdir -p store/store-frontend/src/dist1
 
     - run:
         name: Build Frontend
