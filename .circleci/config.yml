@@ -85,7 +85,8 @@ jobs:
           key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Build Backend
-          command: cd store/store-backend && npm run build
+          command: ng build --prod --output-path=/dist1
+
 
   test_backend:
     docker:
