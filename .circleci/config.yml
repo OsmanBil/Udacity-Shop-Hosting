@@ -69,12 +69,16 @@ jobs:
     docker:
       - image: node:18
     steps:
-      - checkout
-      - restore_cache:
-          key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
-      - run:
-          name: Build Frontend
-          command: cd store/store-frontend && npm run build
+    - checkout
+    - restore_cache:
+        key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
+    - run:
+        name: Erstelle dist1 Ordner
+        command: mkdir -p store/store-frontend/src/dist1
+    - run:
+        name: Build Frontend
+        command: cd store/store-frontend && npm run build
+
 
   build_backend:
     docker:
