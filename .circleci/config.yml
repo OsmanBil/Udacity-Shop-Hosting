@@ -135,7 +135,7 @@ jobs:
       - run:
           name: Deploy to S3
           command: |
-            aws s3 sync store/store-frontend/dist s3://udacity-bucket-00001
+            aws s3 sync store/store-frontend/dist/my-store s3://udacity-bucket-00001
 
 workflows:
   version: 2
