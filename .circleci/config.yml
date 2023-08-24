@@ -80,10 +80,15 @@ jobs:
     - run:
          name: Erstelle dist1 Ordner
          command: mkdir -p store/store-frontend/src/dist1
-
     - run:
         name: Build Frontend
         command: cd store/store-frontend && npm run build
+    - run:
+        name: Diagnose
+        command: |
+          ls -la store/store-frontend/src
+          ls -la store/store-frontend/src/dist1 || echo "dist1 existiert nicht"
+
 
 
   build_backend:
