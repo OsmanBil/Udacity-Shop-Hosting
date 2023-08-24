@@ -136,7 +136,7 @@ jobs:
           name: Deploy to S3
           command: |
             pwd
-            ls -la store
+            ls -la store/store-frontend
            
 
 workflows:
