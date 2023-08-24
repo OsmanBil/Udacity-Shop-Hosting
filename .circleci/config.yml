@@ -137,7 +137,7 @@ jobs:
           command: |
             pwd
             ls -la
-            aws s3 sync store/store-frontend/dist/my-store s3://udacity-bucket-00001 --debug
+           
 
 workflows:
   version: 2
