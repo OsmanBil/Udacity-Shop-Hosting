@@ -88,6 +88,10 @@ jobs:
         command: |
           ls -la store/store-frontend/src
           ls -la store/store-frontend/src/dist1 || echo "dist1 existiert nicht"
+    - persist_to_workspace:
+        root: .
+        paths:
+          - store/store-frontend/src/dist1
 
 
 
@@ -139,6 +143,8 @@ jobs:
       AWS_DEFAULT_REGION: us-east-1
     steps:
       - checkout
+      - attach_workspace:
+          at: /store/store-frontend/src/dist1
       - restore_cache:
           key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
       - run:
