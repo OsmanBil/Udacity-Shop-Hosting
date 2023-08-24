@@ -144,7 +144,8 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /store/store-frontend/src/dist1
+          at: .
+
       - restore_cache:
           key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
       - run:
