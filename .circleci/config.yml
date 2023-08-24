@@ -74,7 +74,7 @@ jobs:
           key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
       - run:
           name: Build Frontend
-          command: cd store/store-frontend && npm run build
+          command: ng build --prod --output-path=/dist1
 
   build_backend:
     docker:
@@ -85,8 +85,7 @@ jobs:
           key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Build Backend
-          command: ng build --prod --output-path=/dist1
-
+          command: cd store/store-backend && npm run build
 
   test_backend:
     docker:
@@ -139,7 +138,7 @@ jobs:
             ls -la 
             ls -la store
             ls -la store/store-frontend
-            ls -la store/store-frontend/src
+            ls -la dist1
 
 workflows:
   version: 2
