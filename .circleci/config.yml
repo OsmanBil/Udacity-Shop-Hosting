@@ -178,10 +178,21 @@ jobs:
             unzip awscliv2.zip
             ./aws/install
       - run:
+          name: Install AWS Elastic Beanstalk CLI
+          command: |
+            pip install awsebcli --upgrade --user
+            export PATH=$PATH:$HOME/.local/bin
+
+      - run:
           name: Diagnose
           command: |
             ls -la store/store-backend/dist
             ls -la store/store-backend/dist/src
+      - run:
+          name: Deploy to Elastic Beanstalk
+          command: |
+            cd store/store-backend
+            eb deploy Testumgebung-env
 
 
 workflows:
