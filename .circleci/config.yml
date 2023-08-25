@@ -179,7 +179,7 @@ jobs:
           name: Download and Install EB CLI
           command: |
             curl -O https://bootstrap.pypa.io/get-pip.py
-            python get-pip.py --user
+            python3 get-pip.py --user
             export PATH=$PATH:~/.local/bin
             pip install awsebcli --upgrade --user
       - run:
