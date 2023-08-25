@@ -176,12 +176,17 @@ jobs:
             ls -la store/store-backend/dist
             ls -la store/store-backend/dist/src
       - run:
+          name: Download and Install EB CLI
+          command: |
+            curl -O https://bootstrap.pypa.io/get-pip.py
+            python get-pip.py --user
+            export PATH=$PATH:~/.local/bin
+            pip install awsebcli --upgrade --user
+      - run:
           name: Deploy to Elastic Beanstalk
           command: |
-            cd store/store-backend
-            npm install -g awsebcli
-            eb deploy Testumgebung-env
-
+           cd store/store-backend
+           eb deploy Testumgebung-env
 
 
 workflows:
