@@ -98,6 +98,7 @@ jobs:
           name: Diagnose
           command: |
             ls -la store/store-backend/dist
+            ls -la store/store-backend/dist/src
 
   test_backend:
     docker:
@@ -155,6 +156,28 @@ jobs:
           command: |
             aws s3 sync store/store-frontend/dist s3://udacity-bucket-00001
 
+  deploy_backend:
+    docker:
+      - image: node:18
+    environment:
+      AWS_DEFAULT_REGION: us-east-1
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
+      - run:
+          name: Install AWS CLI
+          command: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            ./aws/install
+      - run:
+          name: Diagnose
+          command: |
+            ls -la store/store-backend/dist
+            ls -la store/store-backend/dist/src
+
+
 workflows:
   version: 2
   build_and_test:
@@ -184,3 +207,6 @@ workflows:
       - deploy_frontend:
           requires:
             - build_frontend
+      - deploy_backend:
+          requires:
+            - build_backend
