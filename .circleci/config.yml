@@ -176,6 +176,8 @@ jobs:
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             ./aws/install
+            sudo apt-get update
+            sudo apt-get install python3-pip -y
             pip install awsebcli --upgrade --user
             export PATH=$PATH:$HOME/.local/bin
             aws --version
@@ -190,6 +192,7 @@ jobs:
           command: |
             cd store/store-backend
             eb deploy Testumgebung-env
+
 
 workflows:
   version: 2
