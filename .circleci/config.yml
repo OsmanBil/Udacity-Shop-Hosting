@@ -157,29 +157,29 @@ jobs:
             ls -la store/store-frontend/dist
             aws s3 sync store/store-frontend/dist s3://udacity-bucket-00001
 
-deploy_backend:
-  docker:
-    - image: node:18
-  environment:
-    AWS_DEFAULT_REGION: us-east-1
-    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-  steps:
-    - checkout
-    - attach_workspace:
-        at: .
-    - restore_cache:
-        key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
-    - run:
-        name: Diagnose
-        command: |
-          ls -la store/store-backend/dist
-          ls -la store/store-backend/dist/src
-    - run:
-        name: Deploy to Elastic Beanstalk
-        command: |
-          cd store/store-backend
-          eb deploy Testumgebung-env
+  deploy_backend:
+    docker:
+      - image: node:18
+    environment:
+      AWS_DEFAULT_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - restore_cache:
+          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
+      - run:
+          name: Diagnose
+          command: |
+            ls -la store/store-backend/dist
+            ls -la store/store-backend/dist/src
+      - run:
+          name: Deploy to Elastic Beanstalk
+          command: |
+            cd store/store-backend
+            eb deploy Testumgebung-env
 
 
 
