@@ -78,10 +78,11 @@ jobs:
       - run:
           name: Diagnose
           command: |
-            ls -la
-            ls -la store
-            ls -la store/store-frontend
             ls -la store/store-frontend/dist
+      - persist_to_workspace:
+          root: .
+          paths:
+            - store/store-frontend/dist
 
   build_backend:
     docker:
@@ -131,6 +132,8 @@ jobs:
       AWS_DEFAULT_REGION: us-east-1
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - restore_cache:
           key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
       - run:
@@ -143,10 +146,10 @@ jobs:
           name: Deploy to S3
           command: |
             ls -la store/store-frontend/dist
-      - run:
-          name: Deploy to S3
-          command: |
-            aws s3 sync store/store-frontend/dist s3://udacity-bucket-00001
+      # - run:
+      #     name: Deploy to S3
+      #     command: |
+      #       aws s3 sync store/store-frontend/dist s3://udacity-bucket-00001
 
 workflows:
   version: 2
