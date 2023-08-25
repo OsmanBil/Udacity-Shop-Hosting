@@ -155,9 +155,6 @@ jobs:
           name: Deploy to S3
           command: |
             ls -la store/store-frontend/dist
-      - run:
-          name: Deploy to S3
-          command: |
             aws s3 sync store/store-frontend/dist s3://udacity-bucket-00001
 
   deploy_backend:
@@ -165,6 +162,8 @@ jobs:
       - image: node:18
     environment:
       AWS_DEFAULT_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
     steps:
       - checkout
       - attach_workspace:
@@ -172,19 +171,15 @@ jobs:
       - restore_cache:
           key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
-          name: Install AWS CLI
+          name: Install AWS CLI and Elastic Beanstalk CLI
           command: |
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             ./aws/install
-      - run:
-          name: Install AWS Elastic Beanstalk CLI
-          command: |
             pip install awsebcli --upgrade --user
             export PATH=$PATH:$HOME/.local/bin
+            aws --version
             eb --version
-
-
       - run:
           name: Diagnose
           command: |
@@ -195,7 +190,6 @@ jobs:
           command: |
             cd store/store-backend
             eb deploy Testumgebung-env
-
 
 workflows:
   version: 2
