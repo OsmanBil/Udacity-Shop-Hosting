@@ -159,7 +159,7 @@ jobs:
 
   deploy_backend:
     docker:
-      - image: python:3.8
+      - image: node:18
     environment:
       AWS_DEFAULT_REGION: us-east-1
       AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
@@ -171,17 +171,15 @@ jobs:
       - restore_cache:
           key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
-          name: Install AWS CLI
+          name: Install AWS CLI and Elastic Beanstalk CLI
           command: |
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             ./aws/install
-      - run:
-          name: Install Python virtual environment
-          command: |
-            python3 -m venv eb-env
-            source eb-env/bin/activate
-            pip install awsebcli --upgrade
+            apt-get update
+            apt-get install python3-pip -y
+            pip install awsebcli --upgrade --user
+            export PATH=$PATH:$HOME/.local/bin
             aws --version
             eb --version
       - run:
@@ -192,10 +190,8 @@ jobs:
       - run:
           name: Deploy to Elastic Beanstalk
           command: |
-            source eb-env/bin/activate
             cd store/store-backend
             eb deploy Testumgebung-env
-
 
 
 workflows:
