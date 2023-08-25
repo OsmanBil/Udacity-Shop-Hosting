@@ -99,6 +99,10 @@ jobs:
           command: |
             ls -la store/store-backend/dist
             ls -la store/store-backend/dist/src
+      - persist_to_workspace:
+          root: .
+          paths:
+            - store/store-backend/dist
 
   test_backend:
     docker:
@@ -163,6 +167,8 @@ jobs:
       AWS_DEFAULT_REGION: us-east-1
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - restore_cache:
           key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
