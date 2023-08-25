@@ -146,10 +146,10 @@ jobs:
           name: Deploy to S3
           command: |
             ls -la store/store-frontend/dist
-      # - run:
-      #     name: Deploy to S3
-      #     command: |
-      #       aws s3 sync store/store-frontend/dist s3://udacity-bucket-00001
+      - run:
+          name: Deploy to S3
+          command: |
+            aws s3 sync store/store-frontend/dist s3://udacity-bucket-00001
 
 workflows:
   version: 2
