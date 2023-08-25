@@ -12,7 +12,8 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
 
   // Backend-Server URL
-  private BASE_URL: string = 'http://testumgebung-env.eba-6jy5svvu.us-east-1.elasticbeanstalk.com';
+  private BASE_URL: string =
+    'http://testumgebung-env.eba-6jy5svvu.us-east-1.elasticbeanstalk.com';
   //private BASE_URL: string = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {}
