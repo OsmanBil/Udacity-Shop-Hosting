@@ -171,6 +171,11 @@ jobs:
       - restore_cache:
           key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
+         name: Install Elastic Beanstalk CLI
+         command: |
+          pip install awsebcli --upgrade --user
+
+      - run:
           name: Diagnose
           command: |
             ls -la store/store-backend/dist
