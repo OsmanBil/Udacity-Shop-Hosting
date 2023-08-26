@@ -157,11 +157,13 @@ jobs:
           
   deploy_backend:
     docker:
-      - image: node:18
+      - image: "cimg/base:stable"
     environment:
       AWS_DEFAULT_REGION: us-east-1
     steps:
+      - node/install
       - checkout
+      - aws-cli/setup
       - attach_workspace:
           at: .
       - restore_cache:
