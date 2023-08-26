@@ -189,6 +189,12 @@ jobs:
           command: |
             cd store/store-backend &&
             chmod +x bin/deploy.sh && bin/deploy.sh
+      - run:
+          name: Restart Elastic Beanstalk Environment
+          command: |
+            eb init "testumgebung" r us-east-1 -p "Node.js 18"  # Initialisiert die Elastic Beanstalk-Anwendung
+            eb use "Testumgebung-env"  # Setzt die zu verwendende Elastic Beanstalk-Umgebung
+            eb restart  # Startet die Umgebung neu
 
 
 workflows:
