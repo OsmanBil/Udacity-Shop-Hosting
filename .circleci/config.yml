@@ -152,7 +152,8 @@ jobs:
       - run:
           name: Deploy Front-End
           command: |
-            npm run frontend:deploy
+            cd store/store-frontend &&
+            chmod +x bin/deploy.sh && bin/deploy.sh
           
   deploy_backend:
     docker:
@@ -182,7 +183,8 @@ jobs:
       - run:
           name: Deploy Back-End
           command: |
-            npm run backend:deploy
+            cd store/store-backend &&
+            chmod +x bin/deploy.sh && bin/deploy.sh
 
 
 workflows:
