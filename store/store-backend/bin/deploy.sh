@@ -16,10 +16,9 @@
 
 
 # Initialisieren Sie die Elastic Beanstalk-Umgebung (nur beim ersten Mal notwendig oder wenn Sie die Umgebung ändern)
-eb init "testumgebung" -p "Node.js 18"
+eb init "testumgebung" -p "Node.js 18" -r us-east-1
 
 # Erstellen Sie ein neues Anwendungs-Release und bereitstellen Sie es
-eb list
 
 eb deploy "Testumgebung-env"
 
