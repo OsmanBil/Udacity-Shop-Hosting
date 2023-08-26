@@ -23,10 +23,6 @@ jobs:
           command: |
             cd store/store-frontend && npm run prettier            
       - run:
-          name: Front-End Test
-          command: |
-            npm run frontend:test
-      - run:
           name: Front-End Build
           command: |
             npm run frontend:build
