@@ -11,7 +11,7 @@
     "test": "set NODE_ENV=test && db-migrate -e test up && npx tsc && jasmine && db-migrate -e test reset",
     "tsc": "tsc",
     "migrate": "set ENV=test && db-migrate --env test up && db-migrate up",
-    "build": "tsc && copyfiles package.json dist/src/",
+    "build": "npx tsc ",
     "jasmine": "jasmine"
   },
   "author": "Udacity",
