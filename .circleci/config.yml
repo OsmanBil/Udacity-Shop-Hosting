@@ -25,10 +25,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
+          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Lint Backend
-          command: npm run frontend:install
+          command: cd store/store-backend && npm run lint
 
   format_backend:
     docker:
@@ -91,7 +91,7 @@ jobs:
           key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Build Backend
-          command: cd store/store-backend && ./node_modules/.bin/tsc
+          command: cd store/store-backend && npm run build
       - run:
           name: Diagnose
           command: |
