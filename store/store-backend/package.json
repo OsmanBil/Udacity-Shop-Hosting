@@ -12,7 +12,8 @@
     "tsc": "tsc",
     "migrate": "set ENV=test && db-migrate --env test up && db-migrate up",
     "build": "npx tsc ",
-    "jasmine": "jasmine"
+    "jasmine": "jasmine",
+    "postbuild": "shx cp package.json dist/src/"
   },
   "author": "Udacity",
   "license": "ISC",
@@ -48,6 +49,7 @@
     "latest": "^0.2.0",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
+    "shx": "^0.3.4",
     "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
     "tsc-watch": "^4.2.9"
