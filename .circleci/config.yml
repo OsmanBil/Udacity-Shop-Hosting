@@ -3,7 +3,7 @@ orbs:
   node: circleci/node@4.1.0
   aws-cli: circleci/aws-cli@1.3.1
 jobs:
- build:
+  build:
     docker:
       - image: "cimg/base:stable"
     steps:
@@ -15,13 +15,33 @@ jobs:
           command: |
             npm run frontend:install
       - run:
-          name: Back-End Install
+          name: Front-End Lint
           command: |
-            npm run backend:install
+            npm run frontend:lint
+      - run:
+          name: Front-End Prettier
+          command: |
+            cd store/store-frontend && npx prettier --check .
+      - run:
+          name: Front-End Test
+          command: |
+            npm run frontend:test
       - run:
           name: Front-End Build
           command: |
             npm run frontend:build
+      - run:
+          name: Back-End Install
+          command: |
+            npm run backend:install
+      - run:
+          name: Back-End Lint
+          command: |
+            npm run backend:lint
+      - run:
+          name: Back-End Prettier
+          command: |
+            cd store/store-backend && npx prettier --check .
       - run:
           name: Back-End Build
           command: |
