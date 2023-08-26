@@ -5,7 +5,7 @@ orbs:
 jobs:
   install_dependencies:
     docker:
-      - image: "cimg/base:stable"
+      - image: node:18
     steps:
       - node/install
       - checkout
@@ -61,7 +61,7 @@ jobs:
           key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
       - run:
           name: Format Frontend
-          command: npm run backend:prettier
+          command: npm run frontend:prettier
   
   build_frontend:
     docker:
@@ -157,7 +157,7 @@ jobs:
           
   deploy_backend:
     docker:
-      - image: "cimg/base:stable"
+      - image: node:18
     environment:
       AWS_DEFAULT_REGION: us-east-1
     steps:
