@@ -28,7 +28,7 @@ jobs:
           key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Lint Backend
-          command: cd store/store-backend && npm run lint
+          command: npm run backend:lint
 
   format_backend:
     docker:
