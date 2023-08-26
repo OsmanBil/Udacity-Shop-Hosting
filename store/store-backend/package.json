@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "deploy": "chmod +x bin/deploy.sh && bin/deploy.sh",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --config .prettierrc \"src/**/*.ts\" --write",
     "start": "nodemon src/server.ts",
