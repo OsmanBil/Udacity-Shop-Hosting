@@ -11,6 +11,13 @@ jobs:
       - checkout
       - aws-cli/setup
       - run:
+          name: Install Elastic Beanstalk CLI
+          command: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
+            pip install awsebcli --upgrade --user
+      - run:
           name: Front-End Install
           command: |
             npm run frontend:install
