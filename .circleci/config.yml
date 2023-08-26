@@ -55,11 +55,10 @@ jobs:
           name: Deploy Front-End
           command: |
             npm run frontend:deploy
-      - run:
-          name: Deploy Back-End
-          command: |
-            eb --version  # Überprüfen, ob EB CLI installiert ist
-            npm run backend:deploy
+      # - run:
+      #     name: Deploy Back-End
+      #     command: |
+      #       npm run backend:deploy
   test_backend:
     docker:
       - image: node:18
@@ -84,9 +83,6 @@ jobs:
       - run:
           name: Warten auf die Datenbank
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run:
-          name: Install PostgreSQL driver for db-migrate
-          command: /bin/bash -c "npm install -g db-migrate-pg"
       - run:
           name: Backend-Tests
           command: cd store/store-backend && npm run test
