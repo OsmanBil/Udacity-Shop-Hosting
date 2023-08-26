@@ -14,9 +14,6 @@
 # eb deploy $EB_ENV_NAME
 
 
-# Navigieren Sie zum Backend-Verzeichnis
-cd store/store-backend
-
 # Initialisieren Sie die Elastic Beanstalk-Umgebung (nur beim ersten Mal notwendig oder wenn Sie die Umgebung ändern)
 eb init -p [Node.js] [Testumgebung-env]
 
