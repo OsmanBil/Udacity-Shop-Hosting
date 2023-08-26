@@ -10,8 +10,6 @@ jobs:
       - node/install
       - checkout
       - aws-cli/setup
-      - restore_cache:
-          key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
       - run: npm install
       - run: npm run frontend:install
       - run: npm run backend:install
