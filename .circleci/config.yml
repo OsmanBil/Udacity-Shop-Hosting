@@ -85,8 +85,8 @@ jobs:
           name: Warten auf die Datenbank
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
-          name: Installiere db-migrate global
-          command: npm install -g db-migrate
+          name: Install PostgreSQL driver for db-migrate
+          command: npm install -g db-migrate-pg
       - run:
           name: Backend-Tests
           command: cd store/store-backend && npm run test
