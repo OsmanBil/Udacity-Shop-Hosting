@@ -195,7 +195,9 @@ workflows:
       - lint_backend:
           requires:
             - install_dependencies
-
+      - format_backend:
+          requires:
+            - install_dependencies
       - lint_frontend:
           requires:
             - install_dependencies
