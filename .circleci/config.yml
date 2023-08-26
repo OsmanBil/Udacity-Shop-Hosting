@@ -25,10 +25,10 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
+          key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
       - run:
           name: Lint Backend
-          command: cd store/store-backend && npm run lint
+          command: npm run backend:lint
 
   format_backend:
     docker:
@@ -39,7 +39,7 @@ jobs:
           key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Format Backend
-          command: cd store/store-backend && npm run prettier
+          command: npm run backend:prettier
 
   lint_frontend:
     docker:
@@ -61,7 +61,7 @@ jobs:
           key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
       - run:
           name: Format Frontend
-          command: cd store/store-frontend && npm run prettier
+          command: npm run backend:prettier
   
   build_frontend:
     docker:
@@ -91,7 +91,7 @@ jobs:
           key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Build Backend
-          command: cd store/store-backend && npm run build
+          command: npm run backend:build
       - run:
           name: Diagnose
           command: |
