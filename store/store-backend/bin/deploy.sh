@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# # Navigiere ins Backend-Verzeichnis
-# cd store/store-backend
+# Navigiere ins Backend-Verzeichnis
+cd store/store-backend
 
-# # Installiere Abhängigkeiten und baue das Backend
-# npm install
-# npm run build
+# Installiere Abhängigkeiten und baue das Backend
+npm install
+npm run build
 
 # Setze den Namen deiner Elastic Beanstalk-Umgebung
 EB_ENV_NAME=Testumgebung-env
