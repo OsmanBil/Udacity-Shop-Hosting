@@ -4,4 +4,4 @@
 eb init "testumgebung" -p "Node.js 18" -r us-east-1
 
 # Erstellen Sie ein neues Anwendungs-Release und bereitstellen Sie es
-eb deploy "Testumgebung-env" --staged
+eb deploy "Testumgebung-env"
