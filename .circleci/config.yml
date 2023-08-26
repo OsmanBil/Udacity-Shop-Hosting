@@ -19,13 +19,14 @@ jobs:
             - ./node_modules
             - ./store/store-frontend/node_modules
             - ./store/store-backend/node_modules
+
   lint_backend:
     docker:
       - image: node:18
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
+          key: dependency-cache-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Lint Backend
           command: npm run frontend:install
@@ -36,7 +37,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
+          key: dependency-cache-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Format Backend
           command: cd store/store-backend && npm run prettier
@@ -47,7 +48,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
+          key: dependency-cache-{{ checksum "store/store-frontend/package.json" }}
       - run:
           name: Lint Frontend
           command: cd store/store-frontend && npm run lint
@@ -58,7 +59,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
+          key: dependency-cache-{{ checksum "store/store-frontend/package.json" }}
       - run:
           name: Format Frontend
           command: cd store/store-frontend && npm run prettier
@@ -69,7 +70,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
+          key: dependency-cache-{{ checksum "store/store-frontend/package.json" }}
       - run:
           name: Build Frontend
           command: cd store/store-frontend && npm run build
@@ -88,7 +89,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
+          key: dependency-cache-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Build Backend
           command: cd store/store-backend && npm run build
@@ -116,7 +117,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
+          key: dependency-cache-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Install Dockerize
           command: |
@@ -142,7 +143,7 @@ jobs:
       - attach_workspace:
           at: .
       - restore_cache:
-          key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
+          key: dependency-cache-{{ checksum "store/store-frontend/package.json" }}
       - run:
           name: Install AWS CLI
           command: |
@@ -166,6 +167,8 @@ jobs:
       - aws-cli/setup
       - attach_workspace:
           at: .
+      - restore_cache:
+          key: dependency-cache-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Diagnose
           command: |
@@ -185,7 +188,6 @@ jobs:
           command: |
             cd store/store-backend &&
             chmod +x bin/deploy.sh && bin/deploy.sh
-
 
 workflows:
   version: 2
