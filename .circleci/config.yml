@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Front-End Prettier
           command: |
-            cd store/store-frontend && npx prettier --check .
+            cd store/store-frontend && npm run prettier            
       - run:
           name: Front-End Test
           command: |
@@ -41,7 +41,7 @@ jobs:
       - run:
           name: Back-End Prettier
           command: |
-            cd store/store-backend && npx prettier --check .
+            cd store/store-backend && npm run prettier
       - run:
           name: Back-End Build
           command: |
