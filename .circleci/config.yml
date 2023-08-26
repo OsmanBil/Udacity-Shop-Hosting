@@ -9,13 +9,17 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Front-End Install
+          name: Install Node.js and npm
           command: |
-            npm run frontend:install
+            sudo apt-get update
+            sudo apt-get install -y nodejs npm
+      - run:
+          name: Front-End Install
+          command: npm run frontend:install
       - run:
           name: Back-End Install
-          command: |
-            npm run backend:install
+          command: npm run backend:install
+
 
   build:
     docker:
