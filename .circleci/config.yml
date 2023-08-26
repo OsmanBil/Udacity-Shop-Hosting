@@ -21,7 +21,7 @@ jobs:
             - ./store/store-backend/node_modules
   lint_backend:
     docker:
-      - image: node:18
+      - image: cimg/base:stable
     steps:
       - checkout
       - restore_cache:
@@ -29,10 +29,9 @@ jobs:
       - run:
           name: Lint Backend
           command: cd store/store-backend && npm run lint
-
   format_backend:
     docker:
-      - image: node:18
+      - image: cimg/base:stable
     steps:
       - checkout
       - restore_cache:
@@ -40,10 +39,9 @@ jobs:
       - run:
           name: Format Backend
           command: npm run backend:prettier
-
   lint_frontend:
     docker:
-      - image: node:18
+      - image: cimg/base:stable
     steps:
       - checkout
       - restore_cache:
@@ -51,21 +49,19 @@ jobs:
       - run:
           name: Lint Frontend
           command: cd store/store-frontend && npm run lint
-
   format_frontend:
     docker:
-      - image: node:18
+      - image: cimg/base:stable
     steps:
       - checkout
       - restore_cache:
           key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
       - run:
           name: Format Frontend
-          command: npm run backend:prettier
-  
+          command: npm run frontend:prettier
   build_frontend:
     docker:
-      - image: node:18
+      - image: cimg/base:stable
     steps:
       - checkout
       - restore_cache:
@@ -81,10 +77,9 @@ jobs:
           root: .
           paths:
             - store/store-frontend/dist
-
   build_backend:
     docker:
-      - image: node:18
+      - image: cimg/base:stable
     steps:
       - checkout
       - restore_cache:
@@ -101,10 +96,9 @@ jobs:
           root: .
           paths:
             - store/store-backend/dist
-
   test_backend:
     docker:
-      - image: node:18
+      - image: cimg/base:stable
       - image: postgres:13
         environment:
           POSTGRES_HOST: 127.0.0.1
@@ -131,10 +125,9 @@ jobs:
           command: cd store/store-backend && npm run test
           environment:
             DATABASE_URL: postgres://postgres:asds@localhost:5432/dbtest
-
   deploy_frontend:
     docker:
-      - image: node:18
+      - image: cimg/base:stable
     environment:
       AWS_DEFAULT_REGION: us-east-1
     steps:
@@ -154,7 +147,6 @@ jobs:
           command: |
             cd store/store-frontend &&
             chmod +x bin/deploy.sh && bin/deploy.sh
-          
   deploy_backend:
     docker:
       - image: "cimg/base:stable"
@@ -185,8 +177,6 @@ jobs:
           command: |
             cd store/store-backend &&
             chmod +x bin/deploy.sh && bin/deploy.sh
-
-
 workflows:
   version: 2
   build_and_test:
