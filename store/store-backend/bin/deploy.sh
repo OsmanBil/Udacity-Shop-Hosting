@@ -14,10 +14,10 @@
 # eb deploy $EB_ENV_NAME
 
 # Initialisieren Sie die Elastic Beanstalk-Umgebung (nur beim ersten Mal notwendig oder wenn Sie die Umgebung ändern)
-eb init "IhrAnwendungsname" -p "Node.js 14"
+eb init "Testumgebung-env" -p "Node.js 14"
 
 # Erstellen Sie ein neues Anwendungs-Release und bereitstellen Sie es
-eb deploy
+eb deploy "Testumgebung-env"
 
 # Alternativ: Wenn Sie ein ZIP-Archiv für die Bereitstellung erstellen möchten
 # zip -r ../my-app.zip *
