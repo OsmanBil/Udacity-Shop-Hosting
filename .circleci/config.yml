@@ -6,9 +6,19 @@ jobs:
   build:
     docker:
       - image: "cimg/base:stable"
+      - image: postgres:13
+        environment:
+          POSTGRES_HOST: 127.0.0.1
+          POSTGRES_DB: dbtest
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: asds
+    environment:
+      DOCKERIZE_VERSION: v0.6.1
     steps:
       - node/install
       - checkout
+      - restore_cache:
+         key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - aws-cli/setup
       - run:
           name: Install Elastic Beanstalk CLI
@@ -48,64 +58,6 @@ jobs:
           command: |
             cd store/store-backend && npm run prettier
       - run:
-          name: Deploy Front-End
-          command: |
-            npm run frontend:deploy
-
-
-  build_backend:
-    docker:
-      - image: node:18
-    steps:
-      - checkout
-      - restore_cache:
-          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
-      - run:
-          name: Build Backend
-          command: npm run backend:build
-      - run:
-          name: Diagnose
-          command: |
-            ls -la store/store-backend/dist
-            ls -la store/store-backend/dist/src
-      - persist_to_workspace:
-          root: .
-          paths:
-            - store/store-backend/dist
-      
-  deploy_backend:
-    docker:
-      - image: node:18
-    environment:
-      AWS_DEFAULT_REGION: us-east-1
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - restore_cache:
-          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
-      - run:
-          name: Deploy Back-End
-          command: |
-            eb --version  # Überprüfen, ob EB CLI installiert ist
-            npm run backend:deploy
-  
-  test_backend:
-    docker:
-      - image: node:18
-      - image: postgres:13
-        environment:
-          POSTGRES_HOST: 127.0.0.1
-          POSTGRES_DB: dbtest
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: asds
-    environment:
-      DOCKERIZE_VERSION: v0.6.1
-    steps:
-      - checkout
-      - restore_cache:
-          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
-      - run:
           name: Install Dockerize
           command: |
             wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
@@ -119,19 +71,23 @@ jobs:
           command: cd store/store-backend && npm run test
           environment:
             DATABASE_URL: postgres://postgres:asds@localhost:5432/dbtest
+      - run:
+          name: Back-End Build
+          command: |
+            npm run backend:build
+      - run:
+          name: Deploy Front-End
+          command: |
+            npm run frontend:deploy
+      - run:
+          name: Deploy Back-End
+          command: |
+            eb --version  # Überprüfen, ob EB CLI installiert ist
+            npm run backend:deploy
+  
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build
-      - build_backend:
-          requires:
-            - build
-      - test_backend:
-          requires:
-            - build_backend
-      - deploy_backend:
-          requires:
-            - build_backend
-      
-      
+    
