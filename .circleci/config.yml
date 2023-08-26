@@ -58,6 +58,7 @@ jobs:
       - run:
           name: Deploy Back-End
           command: |
+            eb --version  # Überprüfen, ob EB CLI installiert ist
             npm run backend:deploy
   test_backend:
     docker:

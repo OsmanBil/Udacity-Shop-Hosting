@@ -13,9 +13,8 @@
 # # Deploy zum Elastic Beanstalk
 # eb deploy $EB_ENV_NAME
 
-
 # Initialisieren Sie die Elastic Beanstalk-Umgebung (nur beim ersten Mal notwendig oder wenn Sie die Umgebung ändern)
-eb init -p [Node.js] [Testumgebung-env]
+eb init -p [Node.js 18] [Testumgebung-env]
 
 # Erstellen Sie ein neues Anwendungs-Release und bereitstellen Sie es
 eb deploy
