@@ -21,6 +21,8 @@ eb init "testumgebung" -p "Node.js 18"
 # Erstellen Sie ein neues Anwendungs-Release und bereitstellen Sie es
 eb list
 
+eb deploy "Testumgebung-env"
+
 # Alternativ: Wenn Sie ein ZIP-Archiv für die Bereitstellung erstellen möchten
 # zip -r ../my-app.zip *
 # eb deploy --staged
