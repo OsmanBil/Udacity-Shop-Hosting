@@ -6,7 +6,7 @@ orbs:
 jobs:
   install_dependencies:
     docker:
-      - image: node:18
+      - image: "cimg/base:stable"
     steps:
       - checkout
       - restore_cache:
