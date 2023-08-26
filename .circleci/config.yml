@@ -51,6 +51,12 @@ jobs:
           name: Back-End Build
           command: |
             npm run backend:build
+  deploy:
+    docker:
+      - image: "cimg/base:stable"
+    steps:
+      - checkout
+      - aws-cli/setup
       - run:
           name: Deploy Front-End
           command: |
@@ -94,6 +100,10 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test_backend:
+      - test_backend
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy:
           requires:
             - build
