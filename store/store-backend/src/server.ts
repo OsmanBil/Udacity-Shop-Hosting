@@ -25,6 +25,13 @@ const corsOptions = {
 
 app.use(cors(corsOptions)); // Verwende CORS als Middleware
 app.use(bodyParser.json()); // Use the bodyParser middleware to parse the request body if it is in JSON format
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // oder die spezifische URL Ihres Frontends
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 
 // Define a route handler for the main endpoint ('/') of the server
 app.get('/', function (req: Request, res: Response) {
