@@ -152,6 +152,11 @@ jobs:
             unzip awscliv2.zip
             ./aws/install
       - run:
+          name: Install Elastic Beanstalk CLI
+          command: |
+            pip install awsebcli --upgrade --user
+            export PATH=$PATH:$HOME/.local/bin
+      - run:
           name: Deploy to S3
           command: |
             ls -la store/store-frontend/dist

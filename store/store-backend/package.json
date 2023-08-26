@@ -12,7 +12,8 @@
     "tsc": "tsc",
     "migrate": "set ENV=test && db-migrate --env test up && db-migrate up",
     "build": "npx tsc ",
-    "jasmine": "jasmine"
+    "jasmine": "jasmine",
+    "deploy": "chmod +x .bin/deploy.sh && .bin/deploy.sh"
   },
   "author": "Udacity",
   "license": "ISC",
