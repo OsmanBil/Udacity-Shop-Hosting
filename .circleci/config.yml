@@ -214,3 +214,6 @@ workflows:
       - deploy_frontend:
           requires:
             - build_frontend
+      - deploy_backend:
+          requires:
+            - test_backend
