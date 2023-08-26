@@ -48,24 +48,48 @@ jobs:
           command: |
             cd store/store-backend && npm run prettier
       - run:
-          name: Back-End Build
-          command: |
-            npm run backend:build
-  deploy:
-    docker:
-      - image: "cimg/base:stable"
-    steps:
-      - checkout
-      - aws-cli/setup
-      - run:
           name: Deploy Front-End
           command: |
             npm run frontend:deploy
+
+
+  build_backend:
+    docker:
+      - image: node:18
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
+      - run:
+          name: Build Backend
+          command: npm run backend:build
+      - run:
+          name: Diagnose
+          command: |
+            ls -la store/store-backend/dist
+            ls -la store/store-backend/dist/src
+      - persist_to_workspace:
+          root: .
+          paths:
+            - store/store-backend/dist
+      
+  deploy_backend:
+    docker:
+      - image: node:18
+    environment:
+      AWS_DEFAULT_REGION: us-east-1
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - restore_cache:
+          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Deploy Back-End
           command: |
             eb --version  # Überprüfen, ob EB CLI installiert ist
             npm run backend:deploy
+  
   test_backend:
     docker:
       - image: node:18
@@ -100,10 +124,14 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - test_backend
-  build_and_deploy:
-    jobs:
-      - build
-      - deploy:
+      - build_backend:
           requires:
             - build
+      - test_backend:
+          requires:
+            - build_backend
+      - deploy_backend:
+          requires:
+            - build_backend
+      
+      
