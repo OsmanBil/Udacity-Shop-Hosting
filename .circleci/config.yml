@@ -30,6 +30,12 @@ jobs:
             sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update
             pip3 install awsebcli --upgrade --user
       - run:
+          name: Install Dockerize
+          command: |
+            wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+            tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+            rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+      - run:
           name: Front-End Install
           command: |
             npm run frontend:install
@@ -57,12 +63,7 @@ jobs:
           name: Back-End Prettier
           command: |
             cd store/store-backend && npm run prettier
-      - run:
-          name: Install Dockerize
-          command: |
-            wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-            tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-            rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+      
       - run:
           name: Warten auf die Datenbank
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
