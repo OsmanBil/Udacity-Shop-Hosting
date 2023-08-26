@@ -25,7 +25,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-backend-{{ checksum "store/store-frontend/package.json" }}
+          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Lint Backend
           command: cd store/store-backend && npm run lint
