@@ -9,4 +9,4 @@
 # # Hochladen der Dateien auf S3
 # aws s3 sync . s3://$BUCKET_NAME/ --acl public-read
 
-aws s3 cp --recursive --acl public-read ./dist s3://udacity-bucket-00001
+aws s3 cp --recursive ./dist s3://udacity-bucket-00001
