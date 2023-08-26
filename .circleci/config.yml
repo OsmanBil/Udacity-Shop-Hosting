@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Front-End Prettier
           command: |
-            cd store/store-frontend && npm run prettier            
+            cd store/store-frontend && npm run prettier
       - run:
           name: Front-End Build
           command: |
@@ -39,6 +39,10 @@ jobs:
           command: |
             cd store/store-backend && npm run prettier
       - run:
+          name: Back-End Test
+          command: |
+            npm run backend:test
+      - run:
           name: Back-End Build
           command: |
             npm run backend:build
@@ -46,3 +50,38 @@ jobs:
           name: Deploy App
           command: |
             npm run frontend:deploy
+test_backend:
+  docker:
+    - image: node:18
+    - image: postgres:13
+      environment:
+        POSTGRES_HOST: 127.0.0.1
+        POSTGRES_DB: dbtest
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: asds
+  environment:
+    DOCKERIZE_VERSION: v0.6.1
+  steps:
+    - checkout
+    - restore_cache:
+        key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
+    - run:
+        name: Install Dockerize
+        command: |
+          wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+    - run:
+        name: Warten auf die Datenbank
+        command: dockerize -wait tcp://localhost:5432 -timeout 1m
+    - run:
+        name: Backend-Tests
+        command: cd store/store-backend && npm run test
+        environment:
+          DATABASE_URL: postgres://postgres:asds@localhost:5432/dbtest
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test_backend
