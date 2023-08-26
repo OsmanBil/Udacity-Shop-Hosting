@@ -166,8 +166,6 @@ jobs:
       - aws-cli/setup
       - attach_workspace:
           at: .
-      - restore_cache:
-          key: dependency-cache-frontend-{{ checksum "store/store-frontend/package.json" }}
       - run:
           name: Diagnose
           command: |
