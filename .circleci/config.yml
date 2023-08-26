@@ -97,6 +97,10 @@ jobs:
           command: |
             ls -la store/store-backend/dist
             ls -la store/store-backend/dist/src
+      - run :
+          name: Copy package
+          command: |
+            cp store/store-backend/package.json store/store-backend/dist/package.json
       - persist_to_workspace:
           root: .
           paths:
