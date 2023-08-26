@@ -35,8 +35,6 @@ jobs:
       - image: node:18
     steps:
       - checkout
-      - restore_cache:
-          key: dependency-cache-backend-{{ checksum "store/store-backend/package.json" }}
       - run:
           name: Format Backend
           command: cd store/store-backend && npm run prettier
