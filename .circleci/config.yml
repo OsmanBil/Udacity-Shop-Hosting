@@ -157,7 +157,7 @@ jobs:
           
   deploy_backend:
     docker:
-      - image: node:18
+      - image: "cimg/base:stable"
     environment:
       AWS_DEFAULT_REGION: us-east-1
     steps:
