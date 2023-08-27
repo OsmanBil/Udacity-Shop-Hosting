@@ -104,7 +104,9 @@ This step copies the package.json that is needed for deployment.
 - Deploy Front-End & Back-End
 These steps push the front-end and back-end packages to their respective servers or services, completing the deployment process.
 
+## Architecture diagram
 
+![Alt text](images/diagram-site.png)
 
 ## Screenshots
 
