@@ -111,11 +111,16 @@ These steps push the front-end and back-end packages to their respective servers
 ## Screenshots
 
 CircleCi - Screenshots
+![Alt text](images/circleci-diagram.png)
+
 ![Alt text](images/circleci1.png)
 ![Alt text](images/circleci2.png)
 ![Alt text](images/circleci3.png)
 ![Alt text](images/circleci4.png)
 ![Alt text](images/circleci5.png)
+
+![Alt text](images/circleci6.png)
+![Alt text](images/circleci7.png)
 
 AWS services - Screenshots
 
