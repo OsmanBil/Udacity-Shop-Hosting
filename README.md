@@ -86,7 +86,7 @@ Prettier is a code formatter. It re-formats your front-end code to conform to st
 - Front-End Build
 This compiles and bundles your front-end code, making it ready for deployment.
 
--Back-End Install
+- Back-End Install
 Similar to the front-end install, this installs all the back-end dependencies.
 
 - Back-End Lint
