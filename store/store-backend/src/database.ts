@@ -16,7 +16,7 @@ console.log(ENV);
 
 console.log(`Connected to ${POSTGRES_DB} database.`);
 
-const isProduction = ENV === 'dev'; // Oder wie immer Sie Ihre Produktionsumgebung identifizieren
+const isProduction = ENV === 'dev';
 
 const poolConfig: PoolConfig = {
   host: POSTGRES_HOST,
