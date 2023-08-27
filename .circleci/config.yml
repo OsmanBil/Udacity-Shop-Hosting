@@ -95,7 +95,7 @@ jobs:
       - run :
           name: Copy package
           command: |
-            cp store/store-backend/package.json store/store-backend/dist/src/package.json
+            cp store/store-backend/src/package.json store/store-backend/dist/src/package.json
       - run:
           name: Diagnose
           command: |
