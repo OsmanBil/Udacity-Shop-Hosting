@@ -46,6 +46,9 @@ Test with: `cd store/store-backend && npm run test`
 
 
 ## CircleCi - Pipeline
+
+![Alt text](images/circleci-diagram.png)
+
 - Spin up environment
 This is the initial setup phase where you allocate the necessary resources, like CPU and memory, to run the subsequent steps in the pipeline. This is typically done using virtual machines, containers, or cloud-based runners.
 
@@ -111,8 +114,6 @@ These steps push the front-end and back-end packages to their respective servers
 ## Screenshots
 
 CircleCi - Screenshots
-![Alt text](images/circleci-diagram.png)
-
 ![Alt text](images/circleci1.png)
 ![Alt text](images/circleci2.png)
 ![Alt text](images/circleci3.png)
