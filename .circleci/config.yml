@@ -219,4 +219,4 @@ workflows:
             - build_frontend
       - deploy_backend:
           requires:
-            - build_frontend
+            - build_backend
