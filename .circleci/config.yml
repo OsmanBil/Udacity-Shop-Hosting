@@ -58,11 +58,13 @@ jobs:
       - run:
           name: Deploy Front-End
           command: |
-            npm run frontend:deploy
+            cd store/store-frontend &&
+            chmod +x bin/deploy.sh && bin/deploy.sh
       - run:
            name: Deploy Back-End
            command: |
-             npm run backend:deploy
+            cd store/store-backend &&
+            chmod +x bin/deploy.sh && bin/deploy.sh
   test_backend:
     docker:
       - image: node:18
