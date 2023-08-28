@@ -63,9 +63,9 @@ jobs:
       - run:
            name: Deploy Back-End
            command: |
-            eb setenv POSTGRES_DB=$POSTGRES_DB POSTGRES_HOST=$POSTGRES_HOST POSTGRES_PASSWORD=$POSTGRES_PASSWORD POSTGRES_USER=$POSTGRES_USER
             cd store/store-backend &&
             chmod +x bin/deploy.sh && bin/deploy.sh
+
   
 workflows:
   version: 2
