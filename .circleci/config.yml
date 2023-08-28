@@ -70,4 +70,8 @@ workflows:
   version: 2
   lint_prettier_build-deploy:
     jobs:
-      - lint_prettier_build-deploy
+      - lint_prettier_build-deploy:
+          filters:
+            branches:
+              only:
+                - main
