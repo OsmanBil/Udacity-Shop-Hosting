@@ -9,6 +9,7 @@ const index = async (_req: Request, res: Response) => {
     const products = await store.index();
     res.json(products);
   } catch (err) {
+    console.error(err);  // <-- Fügen Sie diese Zeile hinzu
     res.status(500).send('An unexpected error occurred.');
   }
 };

@@ -12,11 +12,10 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
 
   // Backend-Server URL
-  private BASE_URL: string =
-    'http://testumgebung-env.eba-6jy5svvu.us-east-1.elasticbeanstalk.com';
-  //private BASE_URL: string = 'http://localhost:3000';
+  // private BASE_URL: string = 'http://testumgebung-env.eba-6jy5svvu.us-east-1.elasticbeanstalk.com';
+  private BASE_URL: string = 'http://localhost:3000'; // Backend-Server URL (local)
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.http.get<Product[]>(`${this.BASE_URL}/products`).subscribe(

@@ -16,7 +16,9 @@ console.log(ENV);
 
 console.log(`Connected to ${POSTGRES_DB} database.`);
 
-const isProduction = ENV === 'dev';
+// const isProduction = ENV === 'dev'; // das hier verwenden wenn mit ssl gearbeitet wird
+
+const isProduction = ENV !== 'dev'; 
 
 const poolConfig: PoolConfig = {
   host: POSTGRES_HOST,
